@@ -1,188 +1,119 @@
 # StudyDock AI
-
-StudyDock AI is a web-based study assistant that combines **PDF viewing**, **AI tutoring**, and **AI quiz generation** into a single minimalist workspace.
-Users can upload study PDFs, read them inside the built-in viewer, and interact with an AI in two different modes:
-
-* **Tutor Mode** – explains concepts, answers doubts, and simplifies material
-* **Quiz Mode** – generates quizzes based on uploaded study content
-
-The project was built as a lightweight student-focused learning tool using **HTML, Tailwind CSS, JavaScript, PDF.js, and the Gemini API**.
-
----
+Built with **Gemini Canvas** and **ChatGPT**<br><br>
+StudyDock AI is an AI-powered study assistant that lets students upload PDF study material, read it inside an integrated viewer, ask questions about it, and generate quizzes from it. It combines document viewing, tutoring, and quiz generation into a single clean interface.
 
 ## Features
 
-### PDF Study Workspace
+* **PDF Upload & Viewing**
 
-* Upload and view **multiple PDF files**
-* Switch between uploaded documents
-* Navigate pages with **Next / Previous**
-* Zoom in and out inside the PDF viewer
+  * Upload one or more PDF files
+  * Built-in PDF viewer with page navigation and zoom controls
+  * Switch between uploaded documents easily
 
-### AI Tutor Mode
+* **Tutor Mode**
 
-* Ask questions based on uploaded study material
-* Receive explanations and simplified answers
-* Student name and age can be included in the prompt context
+  * Ask questions based on uploaded study material
+  * Receive AI-generated explanations and study help
+  * Responses are contextual to the uploaded PDFs
 
-### AI Quiz Mode
+* **Quiz Mode**
 
-* Generate quizzes from the uploaded study material
-* Keeps quiz chat separate from tutor chat
-* Useful for revision and self-testing
+  * Generate quizzes from the uploaded material
+  * Helps test understanding of a topic from the PDF
+  * Separate chat history from Tutor Mode for better organization
 
-### Chat System
+* **Student Personalization**
 
-* Separate chat histories for **Tutor** and **Quiz**
-* Typing indicator while the AI is generating a response
-* Markdown rendering for AI responses
+  * Optional **Name** and **Age** fields
+  * Can be included in prompts to make responses more student-aware
 
-### UI / UX Features
+* **UI Features**
 
-* Minimalist 3-panel layout
-* Dark mode toggle
-* API key status indicator
-* Warning before leaving/reloading the page to reduce accidental loss of progress
-
----
-
-## Tech Stack
-
-* **HTML**
-* **Tailwind CSS**
-* **JavaScript**
-* **PDF.js**
-* **Marked.js**
-* **Gemini API**
-
----
+  * Light / dark mode toggle
+  * Typing indicator while AI is generating a response
+  * Separate Tutor and Quiz chat tabs
+  * Warning overlay for portrait mode on smaller screens
 
 ## How It Works
 
-1. Enter your **Gemini API key**
-2. Upload one or more **PDF files**
-3. Open a document in the built-in viewer
-4. Use **Tutor Mode** to ask questions about the material
-5. Use **Quiz Mode** to generate quizzes from the same uploaded content
+1. The user uploads one or more PDF documents.
+2. The app extracts text from the PDFs using **PDF.js**.
+3. The extracted text is stored and used as context for AI responses.
+4. When the user sends a message in **Tutor Mode** or **Quiz Mode**, the app:
 
-The AI is given the extracted text from uploaded PDFs as context, allowing it to answer questions or create quizzes based on the study material.
+   * collects the user’s input,
+   * gathers uploaded document text,
+   * optionally includes the student’s name and age,
+   * sends the prompt to the **Google Gemini API**.
+5. The generated response is shown in the chat panel.
 
----
+## Technologies Used
 
-## Installation / Usage
-
-### Option 1: Run locally
-
-1. Download or clone this repository
-2. Open `index.html` in your browser
-3. Enter your Gemini API key in the top bar
-4. Upload your study PDFs
-5. Start using Tutor or Quiz mode
-
-### Option 2: Deploy online
-
-This project can be deployed easily using platforms such as **Vercel** since it is a static frontend project.
-
----
+* **HTML**
+* **CSS / Tailwind CSS**
+* **JavaScript**
+* **PDF.js** – for PDF rendering and text extraction
+* **Marked.js** – for rendering Markdown AI responses
+* **Google Gemini API** – for tutoring and quiz generation
 
 ## Project Structure
 
-```bash
-StudyDock-AI/
-│
-├── index.html        # Main application file
-└── README.md         # Project documentation
-```
+StudyDock AI is a front-end web application with:
 
----
+* a **document upload sidebar**
+* a **central PDF viewer**
+* an **AI chat sidebar** with Tutor and Quiz modes
 
-## Key Design Choices
+The mobile app version is simply the web app loaded inside a web-view container.
 
-### 1. Tutor and Quiz are separated
+## Screens / Main Components
 
-StudyDock AI keeps **Tutor Mode** and **Quiz Mode** as separate chat systems so that:
+### 1. Document Panel
 
-* quiz messages do not mix with tutor explanations
-* the user gets a cleaner study experience
-* different AI tasks stay organized
+Used to upload and switch between PDF documents.
 
-### 2. PDF + AI in one interface
+### 2. PDF Viewer
 
-Instead of switching between a PDF reader and a chatbot, the app keeps:
+Displays the currently selected PDF with:
 
-* documents on the left
-* PDF viewer in the center
-* AI assistant on the right
+* page navigation
+* zoom in / zoom out
+* centered scrollable rendering
 
-This makes studying more seamless and distraction-free.
+### 3. Tutor Chat
 
-### 3. Student-friendly context
+Used for asking doubts, explanations, and study help based on uploaded content.
 
-The app allows a user to enter:
+### 4. Quiz Chat
 
-* **Name**
-* **Age**
+Used for generating quizzes from the uploaded study material.
 
-This information can be included in the prompt context so the AI can better tailor its explanations or quizzes.
+## Current Limitations
 
----
-
-## Limitations
-
-* The project depends on a valid **Gemini API key**
-* Large PDFs may take longer to process because text is extracted from all pages
-* Chat history is currently session-based and does not persist after closing the tab
-* The quality of AI responses depends on the quality of extracted PDF text
-
----
+* The AI depends on the quality and clarity of the uploaded PDF text.
+* Very large PDFs may need truncation before being sent to the AI.
+* Scanned/image-only PDFs may not extract text properly unless OCR is used.
+* An internet connection is required for Gemini API-based responses.
+* A valid Gemini API key is required to use the AI features.
 
 ## Future Improvements
 
-Possible future upgrades for StudyDock AI include:
+Possible future improvements for StudyDock AI include:
 
-* Saving chat history using **localStorage** or a database
-* Highlighting which PDF section an answer came from
-* Generating different quiz types (MCQ, true/false, short answer)
-* Better handling for very large PDFs
-* Exporting quiz results or study summaries
-* More advanced prompt customization for different age groups or subjects
-
----
-
-## Why I Built This
-
-StudyDock AI was built to make studying from PDFs more interactive.
-Instead of passively reading notes or textbooks, students can upload material and immediately:
-
-* ask questions
-* get simplified explanations
-* revise through quizzes
-
-The goal was to create a lightweight study tool that feels more like a **smart learning dock** than just a PDF reader or a chatbot.
-
----
-
-## Screenshots
-
-Example:
-
-```md
-## Screenshots
-
-### Main Interface
-![StudyDock AI Screenshot](screenshot.png)
-```
-
----
+* Multiple-choice quiz generation
+* Answer checking and scoring system
+* Flashcard generation
+* Topic-wise quiz selection
+* Better support for scanned PDFs / OCR
+* Saving chat history and session data
+* Improved mobile app layout and controls
 
 ## License
 
-This project is currently released for learning / portfolio purposes.
-You can add a formal license here later if needed (for example, MIT License).
+This project is licensed under the **CC BY-SA 4.0** license.
 
----
+You are free to share and adapt the material as long as proper credit is given and derivative works are distributed under the same license.
 
 ## Author
 
-Made by **Roshan Deepu Roy**<br>
-with Gemini Canvas
+**Roshan Deepu Roy**
