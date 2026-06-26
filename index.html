@@ -159,12 +159,12 @@
     </main>
 
     <script>
-        let isApp = "False";
+        const isApp = new URLSearchParams(location.search).get("app") === "1";
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
         const isAndroid = /Android/i.test(navigator.userAgent);
         if (isAndroid) {
           // Device supports APKs (Android phones, tablets, ChromeOS, FireOS)
-            if (isApp === "False"){
+            if (isApp){
                 document.getElementById("app-download").style.display = "block";
             }
         }
