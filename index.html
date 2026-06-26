@@ -19,7 +19,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
-        
+        console.log(
+          "Do you want to contribute to the code? %cClick here: https://github.com/R-D-R248/StudyDock-AI", 
+          "color: #0066cc; text-decoration: underline; font-weight: bold;"
+        );
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         #warning{
             display: none;
@@ -30,13 +33,26 @@
             height: 100%;
             z-index: 9999; /* A high number ensures it sits on top of everything else */
         }
+        #app-download{
+            display:none;
+            position: fixed; /* Keeps it locked to the screen, even when scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
         /* Show the object only in portrait mode */
         @media (orientation: portrait) {
             #warning {
                 display: block; /* or 'flex', 'grid', etc. */
             }
         }
-        
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        if (isAndroid) {
+          // Device supports APKs (Android phones, tablets, ChromeOS, FireOS)
+          document.getElementById("app-download").style.display = "block";
+        }
         /* Fixed canvas wrapper for stable scrolling & centering */
         .canvas-wrapper { 
             flex: 1;
@@ -76,6 +92,9 @@
     <!--Warning-->
     <div id="warning" class="warning" style="background-color: #1D4ED8;">
         <p style="text-align:center;transform: translateY(200px);">Rotate your phone to landscape, or maximize the browser window on laptop/desktop.</p>
+    </div>
+    <div id="app-download" style="background-color: #1D4ED8;">
+        <p style="text-align:center;transform: translateY(200px);">Click <a link="https://github.com/R-D-R248/StudyDock-AI/releases/download/v1/StudyDock_AI.apk">here</a> to download app.</p>
     </div>
     <!-- Top Bar 1 -->
     <header class="h-16 shrink-0 flex items-center justify-between px-6 z-20 border-b border-blue-400 dark:border-blue-800 text-white bg-[#4d97ff] dark:bg-blue-700 transition-colors duration-300">
