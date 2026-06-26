@@ -164,7 +164,7 @@
         const isAndroid = /Android/i.test(navigator.userAgent);
         if (isAndroid) {
           // Device supports APKs (Android phones, tablets, ChromeOS, FireOS)
-            if (isApp){
+            if (isApp != true){
                 document.getElementById("app-download").style.display = "block";
             }
         }
