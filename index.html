@@ -49,11 +49,6 @@
                 display: block; /* or 'flex', 'grid', etc. */
             }
         }
-        const isAndroid = /Android/i.test(navigator.userAgent);
-        if (isAndroid) {
-          // Device supports APKs (Android phones, tablets, ChromeOS, FireOS)
-          document.getElementById("app-download").style.display = "block";
-        }
         /* Fixed canvas wrapper for stable scrolling & centering */
         .canvas-wrapper { 
             flex: 1;
@@ -165,7 +160,11 @@
 
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        if (isAndroid) {
+          // Device supports APKs (Android phones, tablets, ChromeOS, FireOS)
+          document.getElementById("app-download").style.display = "block";
+        }
         let state = { 
             mode: 'tutor', 
             apiKey: '', 
